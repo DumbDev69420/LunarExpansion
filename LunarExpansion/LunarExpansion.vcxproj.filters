@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Ressourcendateien">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien\Cheat">
+      <UniqueIdentifier>{e6b9eb60-0aaa-4980-8f40-99cf05692565}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Dependencies">
+      <UniqueIdentifier>{261c592b-1bcb-48f2-9052-dbd019946e2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Cheat">
+      <UniqueIdentifier>{be7675e2-719c-408e-b41f-89cbab552d91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Dependencies">
+      <UniqueIdentifier>{adab4c36-f991-4605-b3fd-13b7469e23f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Cheat\SDK">
+      <UniqueIdentifier>{1cd8c102-8642-4299-94bc-fa96b7483c56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Cheat\SDK">
+      <UniqueIdentifier>{3f6c5309-30a2-4eee-b4c1-062f67d7beb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Cheat\Drawing">
+      <UniqueIdentifier>{7098581d-11bc-429b-91fa-8a00156191af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Cheat\Drawing">
+      <UniqueIdentifier>{0c4dd9c6-6a06-4b77-b1cd-389f1aa01ba0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Cheat\SDK\World">
+      <UniqueIdentifier>{e14ddc78-b088-410d-b160-7f8f63d58221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Cheat\SDK\World">
+      <UniqueIdentifier>{8ab8e671-7102-450e-85e2-64fa60946822}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Cheat\SDK\Util">
+      <UniqueIdentifier>{538d10e9-5ca6-46e6-8b56-04bf199f088f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Cheat\SDK\Util">
+      <UniqueIdentifier>{f44dcedc-ca44-448c-8dd8-e03c79d0b60e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="JVMClient\GlobalValues.cpp">
+      <Filter>Quelldateien\Cheat\SDK</Filter>
+    </ClCompile>
+    <ClCompile Include="JVMClient\CheatMain\SDK\World\Entity.cpp">
+      <Filter>Quelldateien\Cheat\SDK\World</Filter>
+    </ClCompile>
+    <ClCompile Include="JVMClient\CheatMain\SDK\World\Player.cpp">
+      <Filter>Quelldateien\Cheat\SDK\World</Filter>
+    </ClCompile>
+    <ClCompile Include="JVMClient\Dependencies\Java.cpp">
+      <Filter>Quelldateien\Dependencies</Filter>
+    </ClCompile>
+    <ClCompile Include="JVMClient\CheatMain\SDK\Minecraft.cpp">
+      <Filter>Quelldateien\Cheat\SDK\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="JVMClient\CheatMain\SDK\Math.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="JVMClient\CheatMain\CheatMain.h">
+      <Filter>Headerdateien\Cheat</Filter>
+    </ClInclude>
+    <ClInclude Include="JVMClient\GlobalValues.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="JVMClient\Dependencies\Java.h">
+      <Filter>Headerdateien\Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="JVMClient\CheatMain\SDK\SDK.h">
+      <Filter>Headerdateien\Cheat\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="JVMClient\CheatMain\SDK\World\Player.h">
+      <Filter>Headerdateien\Cheat\SDK\World</Filter>
+    </ClInclude>
+    <ClInclude Include="JVMClient\CheatMain\SDK\GlobalTypes.h">
+      <Filter>Headerdateien\Cheat\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="JVMClient\CheatMain\SDK\World\Entity.h">
+      <Filter>Headerdateien\Cheat\SDK\World</Filter>
+    </ClInclude>
+    <ClInclude Include="JVMClient\CheatMain\SDK\Math.h">
+      <Filter>Headerdateien\Cheat\SDK\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="JVMClient\CheatMain\SDK\Minecraft.h">
+      <Filter>Headerdateien\Cheat\SDK\Util</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

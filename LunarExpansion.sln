@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LunarExpansion", "LunarExpansion\LunarExpansion.vcxproj", "{7AC5C25C-D562-4B91-8D23-208384925B5E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7AC5C25C-D562-4B91-8D23-208384925B5E}.Debug|x64.ActiveCfg = Debug|x64
+		{7AC5C25C-D562-4B91-8D23-208384925B5E}.Debug|x64.Build.0 = Debug|x64
+		{7AC5C25C-D562-4B91-8D23-208384925B5E}.Debug|x86.ActiveCfg = Debug|Win32
+		{7AC5C25C-D562-4B91-8D23-208384925B5E}.Debug|x86.Build.0 = Debug|Win32
+		{7AC5C25C-D562-4B91-8D23-208384925B5E}.Release|x64.ActiveCfg = Release|x64
+		{7AC5C25C-D562-4B91-8D23-208384925B5E}.Release|x64.Build.0 = Release|x64
+		{7AC5C25C-D562-4B91-8D23-208384925B5E}.Release|x86.ActiveCfg = Release|Win32
+		{7AC5C25C-D562-4B91-8D23-208384925B5E}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {021E5313-7EE6-4FE3-A1CB-8E05FE910B9E}
+	EndGlobalSection
+EndGlobal

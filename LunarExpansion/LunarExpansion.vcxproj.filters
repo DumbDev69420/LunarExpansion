@@ -70,7 +70,7 @@
       <Filter>Quelldateien\Cheat\SDK\Util</Filter>
     </ClCompile>
     <ClCompile Include="JVMClient\CheatMain\SDK\Math.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\Cheat\SDK\Util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

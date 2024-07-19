@@ -23,14 +23,36 @@ run:
 		}
 
 
-		CMinecraft _CMinecraft;
+		SDK::CMinecraft _CMinecraft;
 
-		jobject Minecraft_ = _CMinecraft.GetInstance();
+		SDK::CPlayer Player = _CMinecraft.GetPlayer();
+
+		SuccessLog(std::format("Player Valid: {}", Player.IsValidPlayer()));
 
 		while (RunCheat == CheatStatus::runCheat && !GetAsyncKeyState(VK_F5))
 		{
+			SDK::Entity::EnableEntities();
 
+			if (Player.IsValidPlayer()) 
+			{
+				auto Location = Player.GetPosition().GetVec();
+
+				SuccessLog(std::format("Player Position: x:{}, y:{}, z:{}", Location.x, Location.y, Location.z));
+			}
+			else
+			{
+				static ULONGLONG UpdatePlayerTick = 0;
+
+				if (GetTickCount64() > UpdatePlayerTick) 
+				{
+					UpdatePlayerTick = GetTickCount64() + 300;
+
+					Player = _CMinecraft.GetPlayer();
+					SuccessLog(std::format("Player Valid: {}", Player.IsValidPlayer()));
+				}
+			}
 		}
+
 	}
 	
 	switch (RunCheat) {
@@ -48,6 +70,8 @@ run:
 #endif
 			break;
 	}
+
+	SDK::Entity::ReleaseEntities();
 
 	delete explorer;
 

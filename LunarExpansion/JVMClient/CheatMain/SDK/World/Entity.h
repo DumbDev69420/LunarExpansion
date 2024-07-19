@@ -9,36 +9,43 @@ namespace SDK
 	{
 		namespace Entity 
 		{
-			jfieldID j_IsLivingID = nullptr;
-			jmethodID j_VelocityID = nullptr;
-			jmethodID j_WorldPositionID = nullptr;
-			jmethodID j_WorldRotationID = nullptr;
+			inline bool IntializedEntityOffsets = false;
+
+			inline jfieldID j_IsLivingID = nullptr;
+			inline jmethodID j_VelocityID = nullptr;
+			inline jfieldID j_WorldPositionID = nullptr;
+			inline jmethodID j_WorldRotationID = nullptr;
 
 
-			void GetEntity_IDS(jclass EntityClass)
+			inline void GetEntity_IDS(jobject Entity)
 			{
 				auto Env = JavaExplorer::getEnv_S();
 
+				auto EntityClass = Env->GetObjectClass(Entity);
+
 				j_IsLivingID = Env->GetFieldID(EntityClass, "isAlive", "Z");
-				j_VelocityID = Env->GetMethodID(EntityClass, "getMotion", "()Lcvi;");
+				j_WorldPositionID = Env->GetFieldID(EntityClass, "position", "Lnet/minecraft/world/phys/Vec3;");
+				//j_VelocityID = Env->GetMethodID(EntityClass, "getMotion", "()Lcvi;");
+
+				IntializedEntityOffsets = true;
+
+				Env->DeleteLocalRef(EntityClass);
 			}
 		}
 	}
 
 	class CEntity
 	{
-	private:
-		using Eventhandler = std::function<void()>();
 	public:
 		CEntity(jobject EntityObject);
 		~CEntity();
 
-		Vector3 GetWorldPosition();
-		Vector3 GetVelocity();
+		struct Vector3 GetWorldPosition();
+		struct Vector3 GetVelocity();
 
-		void SetVelocity(Vector3 Velocity); // Sets Velocity of the Entity (Client Sided else Localplayer and riding Entity or if Player uses Elytra that)
-		void SetWorldPosition(Vector3 Position); //Sets the Position of the Entity. (Client Sided else Localplayer Server Sided but Lagback if Distance it too long!)
-		void SetRotation(Vector3 Rotation, bool StepTurn); //Multi Threaded! if StepTurn is true (Client Sided Or Boat & Elytra)
+		void SetVelocity(struct Vector3 Velocity); // Sets Velocity of the Entity (Client Sided else Localplayer and riding Entity or if Player uses Elytra that)
+		void SetWorldPosition(struct Vector3 Position); //Sets the Position of the Entity. (Client Sided else Localplayer Server Sided but Lagback if Distance it too long!)
+		void SetRotation(struct Vector3 Rotation, bool StepTurn); //Multi Threaded! if StepTurn is true (Client Sided Or Boat & Elytra)
 
 		//To Ensure Garbage Collector doesnt fuck us up
 		bool SetInteractionState(bool Locked);
@@ -51,7 +58,25 @@ namespace SDK
 
 		// Use this to Reference a void Function that gets Called when cleaning up stuff. example for cleaning up resources from Class using an CEntity instance, to let it know the Entity cant be used anymore. 
 		// Call with Nullptr to deactivate
-		void SetCallbackCleanupHelper(Eventhandler Function);
+		void SetCallbackCleanupHelper(std::function<void(void*)> Function, void* _this)
+		{
+			this->m_UseObjectForCleanup = false;
+			this->m_ObjectToCall = nullptr;
+
+			if (Function) {
+				this->FCleanupSelf = Function;
+				this->m_UsingCleanupSelf = true;
+
+				this->m_UseObjectForCleanup = (_this != nullptr);
+				this->m_ObjectToCall = this;
+			}
+			else
+			{
+				this->FCleanupSelf = nullptr;
+				this->m_UsingCleanupSelf = false;
+			}
+
+		}
 
 		constexpr bool IsLocked() const { return m_IsLocked; };
 
@@ -62,9 +87,12 @@ namespace SDK
 		bool m_IsLocked = false;
 
 		bool m_UsingCleanupSelf = false;
+		bool m_UseObjectForCleanup = false;
 
 		//Gets called for when the Entity gets deleted from the List to Clean up resources from Child Classes using an Reference to this class
-		std::function<void()> FCleanupSelf;
+		std::function<void(void*)> FCleanupSelf;
+
+		void* m_ObjectToCall = nullptr;
 
 		//weak reference to owning Entity Object
 		jweak m_owningEntityObject = nullptr;
@@ -86,12 +114,15 @@ namespace SDK
 		void RemoveEntity(CEntity* EntityToRemove);
 
 		//Fetch and Populate list
-		void FetchEntities(CMinecraft* Mc);
+		//void FetchEntities(CMinecraft* Mc);
 
 		//Put this in Loop before iterating Entity List
 		void EnableEntities();
 
-		//Call this after Done using for Fast Clean Up
+		//Call this to release all Entities safely
+		void ReleaseEntities();
+
+		//Call to Disable safe guard on all Entities
 		void DisableEntities();
 	}
 }

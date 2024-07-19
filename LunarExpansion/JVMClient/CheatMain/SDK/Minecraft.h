@@ -10,7 +10,7 @@ namespace SDK
 	public:
         CMinecraft();
         jobject GetInstance();
-        CPlayer GetPlayer();
+        class CPlayer GetPlayer();
         
 private:
 	jclass GetClass();

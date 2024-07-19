@@ -4,6 +4,9 @@ namespace SDK
 {
 	bool Vector3::GetVecFromObj()
 	{
+		if (!m_Valid)
+			return false;
+
 		using namespace Offsets::Math::Vector3;
 
 		auto Env = JavaExplorer::getEnv_S();
@@ -25,6 +28,9 @@ namespace SDK
 
 	bool Vector3::UpdateVec(vec3 position)
 	{
+		if (!m_Valid)
+			return false;
+
 		using namespace Offsets::Math::Vector3;
 
 		auto Env = JavaExplorer::getEnv_S();
@@ -52,8 +58,18 @@ namespace SDK
 
 	Vector3::Vector3(jobject VectorObject)
 	{
+		if (!VectorObject)
+		{
+			this->m_UseJavaObj = false;
+			this->m_Valid = false;
+			return;
+		}
+
+
 		this->m_UseJavaObj = true;
 		this->m_Valid = true;
+
+		this->Vector3Obj = VectorObject;
 
 		if (!Offsets::Math::Vector3::InitiatedFieldIDS) 
 		{

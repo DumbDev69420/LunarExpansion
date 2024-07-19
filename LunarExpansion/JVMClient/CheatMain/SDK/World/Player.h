@@ -7,7 +7,7 @@ namespace SDK
 	class CCamera
 	{
 	public:
-		CCamera(CPlayer* PlayerInstance);
+		CCamera(class CPlayer* PlayerInstance);
 		~CCamera();
 
 		Vector2F WorldPositionToScreen(Vector3 WorldPosition);
@@ -24,6 +24,8 @@ namespace SDK
 	{
 	public:
 		CPlayer();
+		~CPlayer();
+
 		//Checks if PlayerEntityObject is Valid
 		bool IsValidPlayer();
 
@@ -31,9 +33,13 @@ namespace SDK
 		void SetVelocity(Vector3 Velocity);
 		void SetRotation(Vector3 Rotation);
 
+		struct Vector3 GetPosition();
+
 		void InitiatePlayer(jobject MinecrafInstance);
 	private:
 		bool m_IsValid = false;
+
+		static void FreePlayer_Callback(void* _player);
 
 		class CEntity* m_OwningEntity = nullptr;
 		class CCamera* m_PlayerCam = nullptr;

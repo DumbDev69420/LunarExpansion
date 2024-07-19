@@ -11,24 +11,25 @@ namespace SDK
 	{
 		auto MinecraftClass = GetClass();
 
-		auto ID = JavaExplorer::getEnv_S()->GetStaticFieldID(MinecraftClass, "instance", "Lnet/minecraft/client/Minecraft;");
+		if (!MinecraftClass)
+			return nullptr;
+
+		static jfieldID ID = nullptr;
+		
+		ID = JavaExplorer::getEnv_S()->GetStaticFieldID(MinecraftClass, "instance", "Lnet/minecraft/client/Minecraft;");
 
 		jobject MCObject = JavaExplorer::getInstance()->getEnv()->GetStaticObjectField(MinecraftClass, ID);
 
 		if (MCObject)
 		{
-			Globals::SuccessLog(std::format("Found Static Object of Minecraft!, Address:0x{:x}", (uintptr_t)MCObject));
+			//Globals::SuccessLog(std::format("Found Static Object of Minecraft!, Address:0x{:x}", (uintptr_t)MCObject));
 			this->Instance = MCObject;
 		}
 		else
 		{
-			Globals::Fail("Failed to get Minecraft Instance!", false);
+			//Globals::Fail("Failed to get Minecraft Instance!", false);
 			this->Instance = nullptr;
 		}
-
-
-
-		JavaExplorer::getEnv_S()->DeleteLocalRef(MinecraftClass);
 
 		return MCObject;
 	}

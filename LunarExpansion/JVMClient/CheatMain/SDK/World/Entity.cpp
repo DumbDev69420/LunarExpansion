@@ -8,6 +8,9 @@ namespace SDK
 		this->m_owningEntityObject = JavaExplorer::getEnv_S()->NewWeakGlobalRef(EntityObject);
 
 		if (this->m_owningEntityObject) {
+			if (!Offsets::Entity::IntializedEntityOffsets)
+				Offsets::Entity::GetEntity_IDS(EntityObject);
+
 			Entity::AddEntity(this);
 		}
 	}
@@ -15,6 +18,34 @@ namespace SDK
 	CEntity::~CEntity()
 	{
 		Entity::RemoveEntity(this);
+	}
+
+	Vector3 CEntity::GetWorldPosition()
+	{
+		using namespace SDK::Offsets::Entity;
+
+		auto Env = JavaExplorer::getEnv_S();
+
+		auto Vector_ = Env->GetObjectField(m_owningEntityObject, j_WorldPositionID);
+
+		return Vector3(Vector_);
+	}
+
+	Vector3 CEntity::GetVelocity()
+	{
+		return Vector3();
+	}
+
+	void CEntity::SetVelocity(Vector3 Velocity)
+	{
+	}
+
+	void CEntity::SetWorldPosition(Vector3 Position)
+	{
+	}
+
+	void CEntity::SetRotation(Vector3 Rotation, bool StepTurn)
+	{
 	}
 
 	bool CEntity::IsAlive() 
@@ -62,23 +93,9 @@ namespace SDK
 	void CEntity::FreeEntity()
 	{
 		if(m_UsingCleanupSelf)
-		     this->FCleanupSelf();
+		     this->FCleanupSelf(this->m_ObjectToCall);
 
 		delete this;
-	}
-
-	void CEntity::SetCallbackCleanupHelper(Eventhandler Function)
-	{
-		if (Function) {
-			this->FCleanupSelf = Function;
-			this->m_UsingCleanupSelf = true;
-		}
-		else
-		{
-			this->FCleanupSelf = nullptr;
-			this->m_UsingCleanupSelf = false;
-		}
-		
 	}
 
 	namespace Entity
@@ -137,6 +154,21 @@ namespace SDK
 			{
 				EntityCurrent->SetInteractionState(false);
 			}
+		}
+
+		void ReleaseEntities()
+		{
+			DisableEntities();
+
+			std::vector<CEntity*> CopyList = ValidEntities;
+
+			for (auto& EntityCurrent : CopyList)
+			{
+				//if (!EntityCurrent->m_SpecialEntity)
+					delete EntityCurrent;
+			}
+
+			ValidEntities.clear();
 		}
 	}
 }

@@ -10,19 +10,21 @@ namespace SDK
 		{
 			namespace Vector3 
 			{
-				bool InitiatedFieldIDS = false;
+				inline bool InitiatedFieldIDS = false;
 
-				jfieldID Vec3_xID = nullptr;
-				jfieldID Vec3_yID = nullptr;
-				jfieldID Vec3_zID = nullptr;
+				inline jfieldID Vec3_xID = nullptr;
+				inline jfieldID Vec3_yID = nullptr;
+				inline jfieldID Vec3_zID = nullptr;
 
-				void GetVector3_IDS(jclass Vector3Class) //net/miencraft/util/math. Clazz Name 1.21 - 1.12
+				inline void GetVector3_IDS(jclass Vector3Class) //net/miencraft/util/math. Clazz Name 1.21 - 1.12
 				{
 					auto env = JavaExplorer::getEnv_S();
 
 					Vec3_xID = env->GetFieldID(Vector3Class, "x", "D");
 					Vec3_yID = env->GetFieldID(Vector3Class, "y", "D");
 					Vec3_zID = env->GetFieldID(Vector3Class, "z", "D");
+
+					InitiatedFieldIDS = true;
 				}
 			}
 		}

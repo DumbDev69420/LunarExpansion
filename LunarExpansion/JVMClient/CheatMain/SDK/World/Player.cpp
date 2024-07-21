@@ -16,7 +16,7 @@ namespace SDK
 	{
 		bool PlayerValid = false;
 		
-		if (this->m_IsValid && this->m_OwningEntity->IsAlive())
+		if (this->m_IsValid && this->m_OwningEntity->IsValid())
 			PlayerValid = true;
 		else
 			this->m_IsValid = false;

@@ -57,6 +57,17 @@ namespace SDK
 		return Env->GetBooleanField(m_owningEntityObject, j_IsLivingID);
 	}
 
+	bool CEntity::IsValid()
+	{
+		using namespace SDK::Offsets::Entity;
+
+		auto Env = JavaExplorer::getEnv_S();
+
+		auto RemovalReason = Env->GetObjectField(this->m_owningEntityObject, j_removalReason);
+
+		return (RemovalReason == nullptr);
+	}
+
 	bool CEntity::SetInteractionState(bool Locked)
 	{
 		auto Enviroment = JavaExplorer::getEnv_S();
@@ -136,7 +147,7 @@ namespace SDK
 		{
 			for (size_t i = 0; i < ValidEntities.size(); i++)
 			{
-				if (!ValidEntities[i]->IsAlive())
+				if (!ValidEntities[i]->IsValid())
 				{
 					ValidEntities[i]->SetInteractionState(false);
 

@@ -13,6 +13,7 @@ namespace SDK
 
 			inline jfieldID j_IsLivingID = nullptr;
 			inline jmethodID j_VelocityID = nullptr;
+			inline jfieldID j_removalReason = nullptr;
 			inline jfieldID j_WorldPositionID = nullptr;
 			inline jmethodID j_WorldRotationID = nullptr;
 
@@ -24,6 +25,7 @@ namespace SDK
 				auto EntityClass = Env->GetObjectClass(Entity);
 
 				j_IsLivingID = Env->GetFieldID(EntityClass, "isAlive", "Z");
+				j_removalReason = Env->GetFieldID(EntityClass, "removalReason", "Lnet/minecraft/world/entity/Entity$RemovalReason;");
 				j_WorldPositionID = Env->GetFieldID(EntityClass, "position", "Lnet/minecraft/world/phys/Vec3;");
 				//j_VelocityID = Env->GetMethodID(EntityClass, "getMotion", "()Lcvi;");
 
@@ -52,6 +54,9 @@ namespace SDK
 
 		//Check if Object is still Alive
 		bool IsAlive();
+
+		//Check if the Entity is even Valid
+		bool IsValid();
 
 		//Call for Cleanup
 		void FreeEntity();

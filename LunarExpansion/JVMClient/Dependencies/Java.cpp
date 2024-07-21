@@ -42,6 +42,8 @@ JavaExplorer::~JavaExplorer()
 {
 	currentObject = nullptr;
 
+
+	m_jvmti->Deallocate((unsigned char*)this->ClassArray);
 	m_jvm->DetachCurrentThread();
 
 	m_jvmti = nullptr;
@@ -62,6 +64,8 @@ void JavaExplorer::GetLoadedClasses()
 	m_jvmti->GetLoadedClasses(&amount, &classes);
 
 	jboolean isCopy;
+
+	ClassArray = classes;
 
 	for (size_t i = 0; i < amount; i++)
 	{

@@ -33,6 +33,9 @@ private:
 	JNIEnv* m_env = nullptr;
 	jvmtiEnv* m_jvmti = nullptr;
 
+	//Free this later
+	jclass* ClassArray = nullptr;
+
 	void GetLoadedClasses();
 
 	std::unordered_map<std::string, jclass> LoadedClasses;

@@ -37,14 +37,19 @@ namespace SDK
 		{
 			double x, y, z;
 
-			vec3 operator+(vec3& other)
+			vec3 operator+(vec3 other)
 			{
-				return { x + other.x, y + other.y, z + other.z };
+				return vec3{ x + other.x, y + other.y, z + other.z };
 			}
 
-			vec3 operator-(vec3& other)
+			vec3 operator*(vec3 other)
 			{
-				return { x - other.x, y - other.y, z - other.z };
+				return vec3{ x * other.x, y * other.y, z * other.z };
+			}
+
+			vec3 operator-(vec3 other)
+			{
+				return vec3{ x - other.x, y - other.y, z - other.z };
 			}
 		};
 

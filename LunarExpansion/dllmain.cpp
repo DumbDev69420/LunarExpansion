@@ -10,9 +10,7 @@ BOOL __stdcall DllMain(HINSTANCE hInstance ,DWORD reason,LPVOID Reserved)
     switch (reason)
     {
     case DLL_PROCESS_ATTACH:
-#ifndef DEBUG
-        return;
-#else
+#ifdef DEBUG
         AllocConsole();
         freopen_s(&Globals::ConsoleFile, "CONOUT$", "w", stdout);
 #endif
@@ -23,9 +21,7 @@ BOOL __stdcall DllMain(HINSTANCE hInstance ,DWORD reason,LPVOID Reserved)
         break;
 
     case DLL_PROCESS_DETACH:
-#ifndef DEBUG
-        return;
-#else
+#ifdef DEBUG
         fclose(Globals::ConsoleFile);
         FreeConsole();
 #endif

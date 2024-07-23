@@ -7,7 +7,7 @@
 #include <thread>
 
 
-#define DEBUG
+//#define DEBUG
 
 
 namespace Globals {

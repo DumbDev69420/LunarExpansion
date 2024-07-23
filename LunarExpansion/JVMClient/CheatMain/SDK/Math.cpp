@@ -75,7 +75,7 @@ namespace SDK
 		{
 			auto Env = JavaExplorer::getEnv_S();
 
-			auto Clazz = Env->GetObjectClass(VectorObject);
+			jclazz Clazz = Env->GetObjectClass(VectorObject);
 
 			if (!Clazz) 
 			{

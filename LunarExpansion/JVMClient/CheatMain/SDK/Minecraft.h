@@ -8,6 +8,8 @@ namespace SDK
 	{
 		namespace Minecraft
 		{
+			inline bool InitiatedFieldIDS = false;
+
 
 		}
 	}
@@ -18,25 +20,41 @@ namespace SDK
 		jobject Instance = nullptr;
 	public:
 		CMinecraft();
-		jobject GetInstance();
+
+		jobject GetInstance(bool Force);
 		class CPlayer GetPlayer();
+		class CLevel GetCurrentLevel();
 
 	private:
-		jclass GetClass();
+		jclazz GetClass();
 
 		class CClientLevel* level = nullptr;
 	};
 
 	class CLevel
 	{
-	private:
+	protected:
 		jobject* m_LevelReference = nullptr;
+		std::vector<CEntity> m_Entities_InLCPRenderDistance;
 
-		std::string LevelName = "";
-		int Dimension = 0;
+		bool SetInteractionState(bool Locked);
+	private:
+		bool m_IsLocked = false;
+
+		int m_CurrentDimension = 0;
+		std::string m_LevelName = "";
+
+	public:
+		bool operator!=(CLevel& Level);
+		bool operator==(CLevel& Level);
+
+	private:
+		jobject LevelObj = nullptr;
+		//Local Ref
+		jobject m_strongRef = nullptr;
 	};
 
-	class CClientLevel 
+	class CClientLevel : CLevel
 	{
 
 	};

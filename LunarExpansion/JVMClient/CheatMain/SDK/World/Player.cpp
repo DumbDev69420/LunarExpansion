@@ -4,12 +4,11 @@ namespace SDK
 {
 	CPlayer::CPlayer()
 	{
-		this->m_PlayerCam = new CCamera(this);
+		this->m_PlayerCam = CCamera(this);
 	}
 
 	CPlayer::~CPlayer()
 	{
-		delete this->m_PlayerCam;
 	}
 
 	bool CPlayer::IsValidPlayer()
@@ -22,6 +21,22 @@ namespace SDK
 			this->m_IsValid = false;
 
 		return PlayerValid;
+	}
+
+	void CPlayer::SetPosition(Vector3 Position)
+	{
+		if (!m_IsValid)
+			return;
+
+		this->m_OwningEntity->SetWorldPosition(Position);
+	}
+
+	void CPlayer::SetVelocity(Vector3 Velocity)
+	{
+		if (!m_IsValid)
+			return;
+
+		this->m_OwningEntity->SetVelocity(Velocity);
 	}
 
 	void CPlayer::FreePlayer_Callback(void* _player) 
@@ -40,6 +55,14 @@ namespace SDK
 		return this->m_OwningEntity->GetWorldPosition();
 	}
 
+	Vector3 CPlayer::GetVelocity()
+	{
+		if (!m_IsValid)
+			return Vector3();
+
+		return this->m_OwningEntity->GetVelocity();
+	}
+
 	void CPlayer::InitiatePlayer(jobject MinecrafInstance)
 	{
 		if (!MinecrafInstance)
@@ -47,10 +70,11 @@ namespace SDK
 
 		auto Env = JavaExplorer::getEnv_S();
 
-		auto MCClass = Env->GetObjectClass(MinecrafInstance);
+		jclazz MCClass = Env->GetObjectClass(MinecrafInstance);
 		
 		static jfieldID FieldPlayer = nullptr;
 
+		if(!FieldPlayer)
 		FieldPlayer = Env->GetFieldID(MCClass, "player", "Lnet/minecraft/client/player/LocalPlayer;");
 
 		if(FieldPlayer)
@@ -76,12 +100,12 @@ namespace SDK
 			this->m_OwningEntity = nullptr;
 			this->m_IsValid = false;
 		}
-
-		Env->DeleteLocalRef(MCClass);
 	}
+
 
 	CCamera::CCamera(CPlayer* PlayerInstance)
 	{
+		this->m_LocalPlayer = PlayerInstance;
 	}
 
 	CCamera::~CCamera()

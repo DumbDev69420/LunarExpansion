@@ -7,18 +7,22 @@ namespace SDK
 		auto JVEXP = JavaExplorer::getInstance();
 	}
 
-	jobject CMinecraft::GetInstance()
+	jobject CMinecraft::GetInstance(bool Force = false)
 	{
-		auto MinecraftClass = GetClass();
+		if (this->Instance && !Force)
+			return this->Instance;
+
+		jclazz MinecraftClass = GetClass();
 
 		if (!MinecraftClass)
 			return nullptr;
 
 		static jfieldID ID = nullptr;
 		
+		if(!ID)
 		ID = JavaExplorer::getEnv_S()->GetStaticFieldID(MinecraftClass, "instance", "Lnet/minecraft/client/Minecraft;");
 
-		jobject MCObject = JavaExplorer::getInstance()->getEnv()->GetStaticObjectField(MinecraftClass, ID);
+		jobject MCObject = JavaExplorer::getEnv_S()->GetStaticObjectField(MinecraftClass, ID);
 
 		if (MCObject)
 		{
@@ -43,9 +47,57 @@ namespace SDK
 		return player;
 	}
 
-	jclass CMinecraft::GetClass()
+	CLevel CMinecraft::GetCurrentLevel()
+	{
+
+		return CLevel();
+	}
+
+	jclazz CMinecraft::GetClass()
 	{
 		return JavaExplorer::getInstance()->FindClass("net.minecraft.client.Minecraft");
 	}
 
+	bool CLevel::SetInteractionState(bool Locked)
+	{
+		auto Enviroment = JavaExplorer::getEnv_S();
+
+		if (Locked) {
+			auto strongRef = Enviroment->NewLocalRef(this->LevelObj);
+
+			if (strongRef)
+			{
+				this->m_strongRef = strongRef;
+				this->m_IsLocked = true;
+			}
+			else
+			{
+				delete this;
+				return false;
+			}
+		}
+		else
+		{
+			if (this->m_IsLocked)
+			{
+				this->m_IsLocked = false;
+				Enviroment->DeleteLocalRef(this->m_strongRef);
+
+				this->m_strongRef = nullptr;
+			}
+		}
+
+
+		return true;
+	}
+
+	bool CLevel::operator!=(CLevel& Level)
+	{
+		return (this->m_LevelReference != Level.m_LevelReference);
+	}
+
+	bool CLevel::operator==(CLevel& Level)
+	{
+		return (this->m_LevelReference == Level.m_LevelReference);
+	}
 }

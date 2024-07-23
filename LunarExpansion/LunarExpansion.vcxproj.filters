@@ -101,5 +101,8 @@
     <ClInclude Include="JVMClient\CheatMain\SDK\Minecraft.h">
       <Filter>Headerdateien\Cheat\SDK\Util</Filter>
     </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

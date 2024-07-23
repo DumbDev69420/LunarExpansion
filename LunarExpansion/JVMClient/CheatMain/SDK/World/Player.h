@@ -34,6 +34,7 @@ namespace SDK
 		void SetRotation(Vector3 Rotation);
 
 		struct Vector3 GetPosition();
+		struct Vector3 GetVelocity();
 
 		void InitiatePlayer(jobject MinecrafInstance);
 	private:
@@ -42,6 +43,6 @@ namespace SDK
 		static void FreePlayer_Callback(void* _player);
 
 		class CEntity* m_OwningEntity = nullptr;
-		class CCamera* m_PlayerCam = nullptr;
+		class CCamera m_PlayerCam = nullptr;
 	};
 }

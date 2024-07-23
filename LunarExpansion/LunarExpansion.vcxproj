@@ -161,6 +161,7 @@
     <ClCompile Include="JVMClient\GlobalValues.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Event.h" />
     <ClInclude Include="JVMClient\CheatMain\CheatMain.h" />
     <ClInclude Include="JVMClient\CheatMain\SDK\GlobalTypes.h" />
     <ClInclude Include="JVMClient\CheatMain\SDK\Math.h" />

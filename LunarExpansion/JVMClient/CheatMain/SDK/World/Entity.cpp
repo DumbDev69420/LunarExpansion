@@ -33,15 +33,43 @@ namespace SDK
 
 	Vector3 CEntity::GetVelocity()
 	{
-		return Vector3();
+		using namespace SDK::Offsets::Entity;
+
+		auto Env = JavaExplorer::getEnv_S();
+
+		auto Vector_ = Env->GetObjectField(m_owningEntityObject, j_VelocityID);
+
+		return Vector3(Vector_);
 	}
 
 	void CEntity::SetVelocity(Vector3 Velocity)
 	{
+		using namespace SDK::Offsets::Entity;
+
+		auto Env = JavaExplorer::getEnv_S();
+
+		auto Vector_ = Env->GetObjectField(m_owningEntityObject, j_VelocityID);
+
+		Vector3 _Vector3(Vector_);
+
+		_Vector3 = Velocity;
+
+		Env->SetObjectField(m_owningEntityObject, j_VelocityID, Vector_);
 	}
 
 	void CEntity::SetWorldPosition(Vector3 Position)
 	{
+		using namespace SDK::Offsets::Entity;
+
+		auto Env = JavaExplorer::getEnv_S();
+
+		auto Vector_ = Env->GetObjectField(m_owningEntityObject, j_WorldPositionID);
+
+		Vector3 _Vector3(Vector_);
+
+		_Vector3 = Position;
+
+		Env->SetObjectField(m_owningEntityObject, j_WorldPositionID, Vector_);
 	}
 
 	void CEntity::SetRotation(Vector3 Rotation, bool StepTurn)
@@ -54,7 +82,7 @@ namespace SDK
 
 		auto Env = JavaExplorer::getEnv_S();
 
-		return Env->GetBooleanField(m_owningEntityObject, j_IsLivingID);
+		return Env->CallBooleanMethod(m_owningEntityObject, j_IsAliveID);
 	}
 
 	bool CEntity::IsValid()
@@ -63,9 +91,9 @@ namespace SDK
 
 		auto Env = JavaExplorer::getEnv_S();
 
-		auto RemovalReason = Env->GetObjectField(this->m_owningEntityObject, j_removalReason);
+		bool isValid = this->m_IsLocked && Env->CallBooleanMethod(this->m_owningEntityObject, j_IsAliveID);
 
-		return (RemovalReason == nullptr);
+		return isValid;
 	}
 
 	bool CEntity::SetInteractionState(bool Locked)
@@ -149,6 +177,7 @@ namespace SDK
 			{
 				if (!ValidEntities[i]->IsValid())
 				{
+					std::cout << "[*] " << "Entity was Invalid, Cleaning Up!";
 					ValidEntities[i]->SetInteractionState(false);
 
 					auto entity_B = ValidEntities.begin();

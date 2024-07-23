@@ -11,8 +11,8 @@ namespace SDK
 		{
 			inline bool IntializedEntityOffsets = false;
 
-			inline jfieldID j_IsLivingID = nullptr;
-			inline jmethodID j_VelocityID = nullptr;
+			inline jmethodID j_IsAliveID = nullptr;
+			inline jfieldID j_VelocityID = nullptr;
 			inline jfieldID j_removalReason = nullptr;
 			inline jfieldID j_WorldPositionID = nullptr;
 			inline jmethodID j_WorldRotationID = nullptr;
@@ -22,16 +22,15 @@ namespace SDK
 			{
 				auto Env = JavaExplorer::getEnv_S();
 
-				auto EntityClass = Env->GetObjectClass(Entity);
+				jclazz EntityClass = Env->GetObjectClass(Entity);
 
-				j_IsLivingID = Env->GetFieldID(EntityClass, "isAlive", "Z");
+				j_IsAliveID = Env->GetMethodID(EntityClass, "isAlive", "()Z");
 				j_removalReason = Env->GetFieldID(EntityClass, "removalReason", "Lnet/minecraft/world/entity/Entity$RemovalReason;");
 				j_WorldPositionID = Env->GetFieldID(EntityClass, "position", "Lnet/minecraft/world/phys/Vec3;");
-				//j_VelocityID = Env->GetMethodID(EntityClass, "getMotion", "()Lcvi;");
+				j_VelocityID = Env->GetFieldID(EntityClass, "deltaMovement", "Lnet/minecraft/world/phys/Vec3;");
 
 				IntializedEntityOffsets = true;
 
-				Env->DeleteLocalRef(EntityClass);
 			}
 		}
 	}

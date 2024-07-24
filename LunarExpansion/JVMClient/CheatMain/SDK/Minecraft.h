@@ -10,7 +10,28 @@ namespace SDK
 		{
 			inline bool InitiatedFieldIDS = false;
 
+			
+		}
 
+		namespace Level 
+		{
+			inline bool InitiatedFieldIDS = false;
+
+			inline jfieldID j_isClientSide = nullptr;
+
+			inline jmethodID j_getEntities = nullptr;
+		}
+
+		namespace LevelEntityGetter
+		{
+			inline bool InitiatedFieldIDS = false;
+
+			inline jfieldID getAll = nullptr;
+
+			inline void GetLevelEntityGetter_IDS(jobject LevelEntityGetter)
+			{
+
+			}
 		}
 	}
 
@@ -35,7 +56,7 @@ namespace SDK
 	{
 	protected:
 		jobject* m_LevelReference = nullptr;
-		std::vector<CEntity> m_Entities_InLCPRenderDistance;
+		std::vector<class CEntity> m_Entities_InLCPRenderDistance;
 
 		bool SetInteractionState(bool Locked);
 	private:

@@ -31,9 +31,6 @@
     <Filter Include="Quelldateien\Cheat\SDK">
       <UniqueIdentifier>{3f6c5309-30a2-4eee-b4c1-062f67d7beb0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien\Cheat\Drawing">
-      <UniqueIdentifier>{7098581d-11bc-429b-91fa-8a00156191af}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Quelldateien\Cheat\Drawing">
       <UniqueIdentifier>{0c4dd9c6-6a06-4b77-b1cd-389f1aa01ba0}</UniqueIdentifier>
     </Filter>
@@ -48,6 +45,9 @@
     </Filter>
     <Filter Include="Headerdateien\Cheat\SDK\Util">
       <UniqueIdentifier>{f44dcedc-ca44-448c-8dd8-e03c79d0b60e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Cheat\Drawing">
+      <UniqueIdentifier>{7098581d-11bc-429b-91fa-8a00156191af}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -101,7 +101,7 @@
     <ClInclude Include="JVMClient\CheatMain\SDK\Minecraft.h">
       <Filter>Headerdateien\Cheat\SDK\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Event.h">
+    <ClInclude Include="JVMClient\Event.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

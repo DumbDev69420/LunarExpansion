@@ -161,7 +161,6 @@
     <ClCompile Include="JVMClient\GlobalValues.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Event.h" />
     <ClInclude Include="JVMClient\CheatMain\CheatMain.h" />
     <ClInclude Include="JVMClient\CheatMain\SDK\GlobalTypes.h" />
     <ClInclude Include="JVMClient\CheatMain\SDK\Math.h" />
@@ -170,6 +169,7 @@
     <ClInclude Include="JVMClient\CheatMain\SDK\World\Entity.h" />
     <ClInclude Include="JVMClient\CheatMain\SDK\World\Player.h" />
     <ClInclude Include="JVMClient\Dependencies\Java.h" />
+    <ClInclude Include="JVMClient\Event.h" />
     <ClInclude Include="JVMClient\GlobalValues.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

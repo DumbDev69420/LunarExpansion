@@ -16,6 +16,7 @@ namespace SDK
 		void SetFOV(float NewFov);
 
 	private:
+		class CEntity* m_CameraEntity = nullptr;
 		class CPlayer* m_LocalPlayer = nullptr;
 	};
 
@@ -44,5 +45,10 @@ namespace SDK
 
 		class CEntity* m_OwningEntity = nullptr;
 		class CCamera m_PlayerCam = nullptr;
+	};
+
+	class CLocalPlayer
+	{
+
 	};
 }

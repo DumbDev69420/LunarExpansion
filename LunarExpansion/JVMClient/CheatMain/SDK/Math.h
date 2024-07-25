@@ -37,6 +37,11 @@ namespace SDK
 		{
 			double x, y, z;
 
+			double GetNormalizationFactor()
+			{
+				return std::sqrt((x * x) + (y * y) + (z * z));
+			}
+
 			vec3 operator+(vec3 other)
 			{
 				return vec3{ x + other.x, y + other.y, z + other.z };
@@ -45,6 +50,11 @@ namespace SDK
 			vec3 operator*(vec3 other)
 			{
 				return vec3{ x * other.x, y * other.y, z * other.z };
+			}
+
+			vec3 operator/(vec3 other)
+			{
+				return vec3{ x / other.x, y / other.y, z / other.z };
 			}
 
 			vec3 operator-(vec3 other)
@@ -70,6 +80,7 @@ namespace SDK
 		Vector3(jobject VectorObject);
 
 		vec3 GetVec();
+		vec3 GetVecNormalized();
 		void SetVec(vec3 vec);
 
 		void SetMode(bool UseInternalJavaObj) { m_UseJavaObj = UseInternalJavaObj; };

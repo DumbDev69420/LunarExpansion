@@ -118,6 +118,17 @@ namespace SDK
 		return Out;
 	}
 
+	Vector3::vec3 Vector3::GetVecNormalized()
+	{
+		auto vec__ = GetVec();
+
+		float normalizationfactor = vec__.GetNormalizationFactor();
+
+		Vector3::vec3 out_ = { vec__.x / normalizationfactor, vec__.y / normalizationfactor, vec__.z / normalizationfactor };
+
+		return vec__;
+	}
+
 	void Vector3::SetVec(vec3 vec)
 	{
 		if (m_UseJavaObj)

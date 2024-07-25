@@ -87,9 +87,9 @@ run:
 
 			if (Player.IsValidPlayer()) 
 			{
+#ifdef DEBUG
 				auto Location = Player.GetPosition().GetVec();
 
-#ifdef DEBUG
 				static ULONGLONG PrintPlayerPosTick = 0;
 
 				if (TickCurrent > PrintPlayerPosTick)
@@ -98,14 +98,47 @@ run:
 					SuccessLog(std::format("Player Position: x:{}, y:{}, z:{}", Location.x, Location.y, Location.z));
 				}
 #endif
+				static bool Flytest = false;
 
-				if (GetAsyncKeyState(VK_SPACE))
+				if (GetAsyncKeyState('H')& 1)
+					Flytest = !Flytest;
+
+				if (Flytest)
 				{
-					SDK::Vector3 Vec_ = Player.GetVelocity();
+					const float Speed = 15.0f;
 
-					auto VecDif = Vec_.GetVec();
+					const float FallDown_V = -0.7f;
+					const ULONGLONG TickTillFallDown = 500;
 
-					Vec_.SetVec({VecDif.x, 0.1f, VecDif.z});
+					static ULONGLONG TickUpdateFallDown = 0;
+					static ULONGLONG TickUpdateFallDown_Tilldone = 0; // atleast 20ms for Server
+
+					SDK::Vector3 Vec_ = Player.GetForwardVector();
+					SDK::Vector3 Vec_CCVelocity = Player.GetVelocity();
+
+					auto VecDif = Vec_.GetVecNormalized();
+					auto VecDif__CCVelocity = Vec_CCVelocity.GetVec();
+
+					if (TickCurrent >= TickUpdateFallDown)
+					{
+						if (TickCurrent >= TickUpdateFallDown_Tilldone)
+						{
+							TickUpdateFallDown = TickCurrent + TickTillFallDown;
+							TickUpdateFallDown_Tilldone = TickUpdateFallDown + 20;
+						}
+						else
+						{
+							Vec_.SetVec({ VecDif__CCVelocity.x, FallDown_V, VecDif__CCVelocity.z });
+						}
+					}
+
+					float highSet = 1.0f;
+
+					if (GetAsyncKeyState(VK_SPACE))
+					{
+						Vec_.SetVec({ VecDif.x * Speed, highSet * Speed, VecDif.z * Speed });
+					}
+					
 
 					Player.SetVelocity(Vec_);
 				}

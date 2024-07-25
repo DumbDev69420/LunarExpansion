@@ -42,6 +42,17 @@ namespace SDK
 		return Vector3(Vector_);
 	}
 
+	Vector3 CEntity::GetForwardVector()
+	{
+		using namespace SDK::Offsets::Entity;
+
+		auto Env = JavaExplorer::getEnv_S();
+
+		auto Vector_ = Env->CallObjectMethod(m_owningEntityObject, j_getForward);
+
+		return Vector3(Vector_);
+	}
+
 	void CEntity::SetVelocity(Vector3 Velocity)
 	{
 		using namespace SDK::Offsets::Entity;

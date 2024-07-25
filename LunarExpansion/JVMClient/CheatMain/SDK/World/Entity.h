@@ -16,6 +16,7 @@ namespace SDK
 			inline jfieldID j_removalReason = nullptr;
 			inline jfieldID j_WorldPositionID = nullptr;
 			inline jmethodID j_WorldRotationID = nullptr;
+			inline jmethodID j_getForward = nullptr;
 
 
 			inline void GetEntity_IDS(jobject Entity)
@@ -25,6 +26,8 @@ namespace SDK
 				jclazz EntityClass = Env->GetObjectClass(Entity);
 
 				j_IsAliveID = Env->GetMethodID(EntityClass, "isAlive", "()Z");
+				j_getForward = Env->GetMethodID(EntityClass, "getForward", "()Lnet/minecraft/world/phys/Vec3;");
+
 				j_removalReason = Env->GetFieldID(EntityClass, "removalReason", "Lnet/minecraft/world/entity/Entity$RemovalReason;");
 				j_WorldPositionID = Env->GetFieldID(EntityClass, "position", "Lnet/minecraft/world/phys/Vec3;");
 				j_VelocityID = Env->GetFieldID(EntityClass, "deltaMovement", "Lnet/minecraft/world/phys/Vec3;");
@@ -43,6 +46,8 @@ namespace SDK
 
 		struct Vector3 GetWorldPosition();
 		struct Vector3 GetVelocity();
+
+		struct Vector3 GetForwardVector();
 
 		void SetVelocity(struct Vector3 Velocity); // Sets Velocity of the Entity (Client Sided else Localplayer and riding Entity or if Player uses Elytra that)
 		void SetWorldPosition(struct Vector3 Position); //Sets the Position of the Entity. (Client Sided else Localplayer Server Sided but Lagback if Distance it too long!)

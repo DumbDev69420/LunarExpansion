@@ -153,6 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="JVMClient\CheatMain\SDK\GlobalTypes.cpp" />
     <ClCompile Include="JVMClient\CheatMain\SDK\Math.cpp" />
     <ClCompile Include="JVMClient\CheatMain\SDK\Minecraft.cpp" />
     <ClCompile Include="JVMClient\CheatMain\SDK\World\Entity.cpp" />

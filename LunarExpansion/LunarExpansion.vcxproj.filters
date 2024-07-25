@@ -54,9 +54,6 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="JVMClient\GlobalValues.cpp">
-      <Filter>Quelldateien\Cheat\SDK</Filter>
-    </ClCompile>
     <ClCompile Include="JVMClient\CheatMain\SDK\World\Entity.cpp">
       <Filter>Quelldateien\Cheat\SDK\World</Filter>
     </ClCompile>
@@ -71,6 +68,12 @@
     </ClCompile>
     <ClCompile Include="JVMClient\CheatMain\SDK\Math.cpp">
       <Filter>Quelldateien\Cheat\SDK\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="JVMClient\GlobalValues.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="JVMClient\CheatMain\SDK\GlobalTypes.cpp">
+      <Filter>Quelldateien\Cheat\SDK</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

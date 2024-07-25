@@ -37,6 +37,8 @@ namespace SDK
 		struct Vector3 GetPosition();
 		struct Vector3 GetVelocity();
 
+		struct Vector3 GetForwardVector();
+
 		void InitiatePlayer(jobject MinecrafInstance);
 	private:
 		bool m_IsValid = false;

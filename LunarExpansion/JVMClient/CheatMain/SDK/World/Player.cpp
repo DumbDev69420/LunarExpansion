@@ -63,6 +63,14 @@ namespace SDK
 		return this->m_OwningEntity->GetVelocity();
 	}
 
+	Vector3 CPlayer::GetForwardVector()
+	{
+		if (!m_IsValid)
+			return Vector3();
+
+		return this->m_OwningEntity->GetForwardVector();
+	}
+
 	void CPlayer::InitiatePlayer(jobject MinecrafInstance)
 	{
 		if (!MinecrafInstance)

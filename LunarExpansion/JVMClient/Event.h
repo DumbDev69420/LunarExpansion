@@ -21,7 +21,7 @@ public:
 	{
 		for (Event_& eventCur : m_callbacks) {
 			if (eventCur)
-				eventCur(params...); // Correct expansion
+				eventCur(params...);
 		}
 	}
 
